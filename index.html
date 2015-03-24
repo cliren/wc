@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>An introduction to Web Components</title>
+    <link rel="stylesheet" type="text/css" href="js/build.css">
+  </head>
+  <body>
+    <article>
+      <section data-bespoke-state="title">
+        <h1>Componentize Web with <br />Web Components</h1>
+        <h2>Surender Katikaneni</h2>
+      </section>
+      <section>
+        <h1 class="bullet">what are web components ?</h1>
+        <h3 class="bullet">little history before diving in...</h3>
+      </section>
+      <section>
+        <h1 class="bullet">Web 1.0</h1>
+        <ul>
+          <li>Websites</li>
+          <li>Homepages</li>
+          <li>Animated GIFs!</li>
+          <li>View source</li>
+          <li>Java Applets</li>
+        </ul>
+      </section>
+      <section>
+        <h1 class="bullet">Web 1.5</h1>
+        <ul>
+          <li>Passable CSS<span class="bullet">: Underlined text!</span><span class="bullet"> Link colours!</span><span class="bullet"> Border types!</span></li>
+          <li>Passable JavaScript<span class="bullet">: Drop down menus!</span><span class="bullet"> Chromeless windows!</span><span class="bullet"> Pop ups!</span><span class="bullet"> Snow animations!</span></li>
+        </ul>
+      </section>
+      <section>
+        <h1 class="bullet">Web 2.0</h1>
+        <ul>
+          <li>DHTML</li>
+          <li>XMLHttpRequest &rarr; AJAX</li>
+          <li>JSON, JSONP</li>
+          <li>APIs</li>
+          <li>Mash ups</li>
+          <li>Rich UIs</li>
+          <li>Widgets!</li>
+          <li>Calendars! Color pickers!</li>
+          <li>JS frameworks and libraries<span class="bullet">: Prototype,</span><span class="bullet"> Dojo,</span><span class="bullet"> jQuery,</span><span class="bullet"> yUI,</span><span class="bullet"> mootools...</span></li>
+        </ul>
+      </section>
+      <section>
+        <h1 class="bullet">LOTS of plug-ins!</h1>
+        <h2 class="bullet">MASSIVE ecosystem, Awesome!</h2>
+        <ul>
+          <li>easy to add features to a project</li>
+          <li>there's a plug-in for everything</li>
+          <li>"designers can code"</li>
+          <li>code reuse</li>
+          <li>many different vendors</li>
+          <li>but...</li>
+        </ul>
+      </section>
+      <section>
+        <h1 class="bullet">Maintenance pain</h1>
+        <ul>
+          <li>globals / css bleeding all over the page</li>
+          <li>various coding "standards"<span class="bullet"> (or lack of them)</span></li>
+          <li>incompatible plugins<span class="bullet"> (so you need to load 2+ libraries)</span></li>
+          <li>subpar performance<span class="bullet">: life cycle not in sync with page render,</span><span class="bullet"> changing the non-efficient CSS properties...</span></li>
+        </ul>
+      </section>
+      <section>
+        <h1>Also, cumbersome code</h1>
+        <pre class="bullet"><code class="language-markup">&lt;div class="widget calendar ui theme-winter"&gt;
+  &lt;div class="component-wrapper"&gt;
+    &lt;div class="inner-content"&gt;
+      (ad nauseaum)
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+      </section>
+      <section>
+        <pre class="bullet"><code class="language-javascript">var componentWrapper
+  = document.createElement('div');
+var innerContent
+  = document.createElement('div');
+componentWrapper.appendChild(innerContent);
+// ...
+return componentWrapper;
+
+// ...
+calendarEl.appendChild(componentWrapper);
+</code></pre>
+      </section>
+      <section>
+        <pre class="bullet"><code class="language-javascript">$("#datepicker")
+  .datepicker($.datepicker.regional["fr"]);
+$("#locale").change(function() {
+  $("#datepicker").datepicker("option",
+    $.datepicker.regional[ $(this).val() ] );
+});
+</code></pre>
+      </section>
+      <section>
+        <h1 class="bullet">Can we do better?</h1>
+        <h2 class="bullet">What if browsers made it easier to build modular, more encapsulated code?</h2>
+      </section>
+      <section>
+        <h1 class="bullet">What if we could teach new elements to the browser?</h1>
+        <pre class="bullet"><code class="language-markup">&lt;x-calendar&gt;&lt;/x-calendar&gt;
+</code></pre>
+      </section>
+      <section>
+        <pre class="bullet"><code class="language-javascript">var calendar =
+  document.createElement('x-calendar');
+  
+var calendar =
+  document.querySelector('x-calendar');
+  </code></pre>
+      </section>
+      <section>
+        <pre class="bullet"><code class="language-javascript">calendar.nextMonth();
+calendar.setLocale('fr');
+</code></pre>
+      </section>
+      <section>
+        <h1 class="bullet">Each instance of these new elements...</h1>
+        <ul>
+          <li>is a DOM element</li>
+          <li>Deals with building its DOM tree</li>
+          <li>Behaves like other DOM elements</li>
+          <li>Lives in the DOM tree with the rest of other elements</li>
+          <li>Can be accessed and manipulated with DOM methods... or UI libraries</li>
+          <li>Is also a JavaScript object</li>
+          <li>... so it can have methods!</li>
+        </ul>
+      </section>
+      <section>
+        <h2 class="bullet">How do we make this happen?</h2>
+        <h1 class="bullet">The pillars of Web Components</h1>
+        <ul>
+          <li>Custom elements</li>
+          <li>HTML templates</li>
+          <li>Shadow DOM</li>
+          <li>HTML imports</li>
+        </ul>
+      </section>
+      <section>
+        <h1 class="bullet">1. <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements">Custom elements</a></h1>
+        <h2 class="bullet">Teach the browser about a new type of element</h2>
+        <pre class="bullet"><code class="language-javascript">document.register('web-bell', WebBellPrototype);
+</code></pre>
+      </section>
+      <section>
+        <h1 class="bullet">A custom element prototype</h1>
+        <ul>
+          <li>at least extends <tt>HTMLElement.prototype</tt></li>
+          <li>defines lifecycle callbacks for element instances (created, attached...)</li>
+          <li>defines methods</li>
+          <li>defines getters, setters...</li>
+        </ul>
+      </section>
+      <section>
+        <h2 class="bullet">WebBell Prototype:</h2>
+        <pre class="bullet"><code class="language-javascript">var WebBellPrototype =
+  Object.create(HTMLElement.prototype);
+  
+WebBellPrototype.createdCallback = function() {
+  this.innerHTML = '🔔';
+};
+</code></pre>
+      </section>
+      <section>
+        <h1 class="bullet">2. <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template">HTML Templates</a></h1>
+        <h2 class="bullet">"Inert HTML chunks"</h2>
+        <h3 class="bullet">not live until you say so</h3>
+        <pre class="bullet"><code class="language-markup">&lt;template id="row-template"&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;input .../&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;button .../&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/template&gt;
+</code></pre>
+      </section>
+      <section>
+        <h2 class="bullet">Creating rows on the fly</h2>
+        <pre class="bullet"><code class="language-javascript">var tpl =
+  document.getElementById('row-template');
+var table =
+  document.getElementById('form-table');
+  
+table.appendChild(tpl.content.cloneNode());
+</code></pre>
+      </section>
+      <section>
+        <h1 class="bullet">3. <a href="http://w3c.github.io/webcomponents/spec/shadow/">Shadow DOM</a></h1>
+        <h2 class="bullet">Or: you can see, but not touch this!</h2>
+        <pre class="bullet"><code class="language-javascript">var shadow = node.createShadowRoot();
+shadow.appendChild(otherNodes);
+</code></pre>
+      </section>
+      <section data-bespoke-state="feature">
+        <h2>Shadow DOM in context</h2><img src="images/shadowroots.png">
+      </section>
+      <section>
+        <h1>Shadow DOM:</h1>
+        <h2 class="bullet">Tricky yet powerful</h2>
+        <ul>
+          <li>Creates a boundary around your element</li>
+          <li>Superuseful for things such as players, calendars</li>
+          <li>It is still in the same doc context (not an iframe)</li>
+          <li>Many concepts and subtleties</li>
+          <li><a href="http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/">Nice tutorial</a></li>
+        </ul>
+      </section>
+      <section>
+        <h1 class="bullet">4. <a href="http://w3c.github.io/webcomponents/spec/imports/">HTML imports</a></h1>
+        <h2 class="bullet">Include HTML documents in other HTML documents</h2>
+        <h2 class="bullet">or: "require() for the web"</h2>
+        <pre class="bullet"><code class="language-markup">&lt;link rel="import" href="my-component.html"&gt;
+</code></pre>
+      </section>
+      <section>
+        <h2 class="bullet">my-component.html's <tt>&lt;head&gt;</tt></h2>
+        <pre class="bullet"><code class="language-markup">&lt;script src="my-component.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="my-component.css"&gt;</code></pre>
+        <p class="bullet"><a href="http://www.html5rocks.com/en/tutorials/webcomponents/imports/">A tutorial</a></p>
+      </section>
+      <section>
+        <h1 class="bullet">(Rough) support overview</h1>
+        <ul>
+          <li>Chrome, Opera: ALL</li>
+          <li>Firefox: Behind a flag, ALL except HTML imports</li>
+          <li>Safari: Templates</li>
+          <li>Internet Explorer<span class="bullet">: ¯\_(ツ)_/¯</span></li>
+        </ul>
+        <p class="bullet"><a href="https://jonrimmer.github.io/are-we-componentized-yet/">Are we componentized yet?</a></p>
+      </section>
+      <section>
+        <h2 class="bullet">Not supported on every browser</h2>
+        <h1 class="bullet">but... <span class="bullet">polyfills!</a></h1>
+      </section>
+      <section>
+        <h1 class="bullet"><a href="https://github.com/WebComponents/webcomponentsjs"><tt>webcomponents.js</tt></a></h1>
+        <ul>
+          <li>polyfills custom elements, HTML imports, Shadow DOM</li>
+          <li>also WeakMap and Mutation Observers</li>
+        </ul>
+        <h2 class="bullet">Also <tt>webcomponents-lite.js</tt></h2>
+        <ul>
+          <li>polyfill custom elements and HTML imports only</li>
+        </ul>
+        <p class="bullet">Custom Elements are pretty safe to use right now!</p>
+      </section>
+      <section>
+        <h2 class="bullet">A note of warning</h2>
+        <h1 class="bullet">Polyfills are NOT FREE</h1>
+        <ul>
+          <li>They come at a cost (bandwidth, processing)</li>
+          <li>Especially Shadow DOM polyfill!</li>
+          <li>Be mindful and aware</li>
+        </ul>
+      </section>
+      <section>
+        <h1 class="bullet">What about <a href="https://www.polymer-project.org/">Polymer</a>? <a href="http://x-tags.org/">X-Tag</a>?</h1>
+        <h2 class="bullet">Syntactic sugar to make vanilla web components less sour</h2>
+        <h3 class="bullet">I ❤️ BAD PUNS</h3>
+        <ul>
+          <li>Built on top of the Web Components pillars</li>
+          <li>... or on the polyfills</li>
+          <li><strong>Not</strong> shipped with the browser!</li>
+        </ul>
+      </section>
+      <section>
+        <h1 class="bullet">X-Tag example</h1>
+        <pre><code class="language-javascript">xtag.register('web-bell', {
+  extends: 'div',
+  lifecycle: {
+    created: function() {
+      this.innerHTML = 'BELL';
+    }
+  }
+});
+</code></pre>
+      </section>
+      <section>
+        <h1 class="bullet">Declarative polymer example</h1>
+        <pre><code class="language-markup">&lt;polymer-element name="web-bell" extends="div"&gt;
+  &lt;template&gt;
+    BELL
+  &lt;/template&gt;
+  &lt;script&gt;
+    Polymer();
+  &lt;/script&gt;
+&lt;/polymer-element&gt;
+</code></pre>
+      </section>
+      <section>
+        <h1 class="bullet">Imperative Polymer example</h1>
+        <pre><code class="language-javascript">Polymer('web-bell', {
+  extends: 'div',
+  created: function() {
+    this.innerHTML = 'BELL';
+  }
+});
+</code></pre>
+      </section>
+      <section>
+        <h1>There's also <a href="http://bosonic.github.io">Bosonic</a></h1>
+        <h3>(but I haven't had time to look into it in detail yet)</h3>
+        <ul>
+          <li>using a mixture of webcomponents.js polyfills and their own</li>
+          <li>compatible down to IE9</li>
+        </ul>
+      </section>
+      <section>
+        <h1 class="bullet">Which one is better?</h1>
+        <ul>
+          <li>All are nice libraries...</li>
+          <li>but you need the library the component was built with to instantiate them</li>
+          <li>and we're back to the jQuery/Moo situation</li>
+          <li>Yet once you instantiate them, they are just DOM elements! Yay!</li>
+        </ul>
+      </section>
+      <section>
+        <h3>for more info</h3>
+        <h1><a href="http://webcomponents.org/">webcomponents.org</a></h1>
+        <h2>is a good starting point!</h2>
+      </section>
+      <section data-bespoke-state="title">
+        <h1>Thanks!</h1>
+        <h2><a href="https://twitter.com/supersole">@supersole</a></h2>
+        <h3><a href="http://soledadpenades.com">soledadpenades.com</a></h3>
+      </section>
+    </article>
+    <script src="js/build.js"></script>
+  </body>
+</html>
