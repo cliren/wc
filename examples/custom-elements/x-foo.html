@@ -2,7 +2,12 @@
     var XFooProto = Object.create(HTMLElement.prototype);
 
     XFooProto.createdCallback = function() {
-        this.innerHTML = "<b>I am your custom element Foo!</b>";
+        var content = 'I am your custom element Foo!';
+        this.innerHTML = '<b>' + content + '</b>';
+        this.addEventListener('click', function(e) {
+            alert(content);
+        });
+
     };
 
     var XFoo = document.registerElement('x-foo', {prototype: XFooProto});
