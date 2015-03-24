@@ -9,17 +9,18 @@
   <body>
     <article>
       <section data-bespoke-state="title">
-        <h1>Componentize Web with <br />Web Components</h1>
+        <h1>Web Components</h1>
+        <h3>is the future...</h3>
         <h2>Surender Katikaneni</h2>
       </section>
       <section>
         <h1 class="bullet">what are web components ?</h1>
-        <h3 class="bullet">little history before diving in...</h3>
+        <h3 class="bullet">a little history before diving in...</h3>
       </section>
       <section>
         <h1 class="bullet">Web 1.0</h1>
         <ul>
-          <li>Websites</li>
+          <li>Simple documents</li>
           <li>Homepages</li>
           <li>Animated GIFs!</li>
           <li>View source</li>
@@ -29,8 +30,8 @@
       <section>
         <h1 class="bullet">Web 1.5</h1>
         <ul>
-          <li>Passable CSS<span class="bullet">: Underlined text!</span><span class="bullet"> Link colours!</span><span class="bullet"> Border types!</span></li>
-          <li>Passable JavaScript<span class="bullet">: Drop down menus!</span><span class="bullet"> Chromeless windows!</span><span class="bullet"> Pop ups!</span><span class="bullet"> Snow animations!</span></li>
+          <li>Passable CSS<span class="bullet">: Underlined text!, Link colors!, Border types!</span></li>
+          <li>Passable JavaScript<span class="bullet">: Drop down menus!, Pop ups!, animations</span></li>
         </ul>
       </section>
       <section>
@@ -40,15 +41,14 @@
           <li>XMLHttpRequest &rarr; AJAX</li>
           <li>JSON, JSONP</li>
           <li>APIs</li>
-          <li>Mash ups</li>
-          <li>Rich UIs</li>
+          <li>Mash ups, Rich UIs</li>
           <li>Widgets!</li>
-          <li>Calendars! Color pickers!</li>
-          <li>JS frameworks and libraries<span class="bullet">: Prototype,</span><span class="bullet"> Dojo,</span><span class="bullet"> jQuery,</span><span class="bullet"> yUI,</span><span class="bullet"> mootools...</span></li>
+          <li>Date pickers! Color pickers!</li>
+          <li>JS frameworks and libraries<span class="bullet">: Prototype, jQuery, Dojo, yUI</span></li>
         </ul>
       </section>
       <section>
-        <h1 class="bullet">LOTS of plug-ins!</h1>
+        <h1 class="bullet">TONS of jQuery plug-ins!</h1>
         <h2 class="bullet">MASSIVE ecosystem, Awesome!</h2>
         <ul>
           <li>easy to add features to a project</li>
@@ -62,10 +62,12 @@
       <section>
         <h1 class="bullet">Maintenance pain</h1>
         <ul>
+          <li>Side effects</li>
           <li>globals / css bleeding all over the page</li>
+          <li>bloated code</li>
           <li>various coding "standards"<span class="bullet"> (or lack of them)</span></li>
-          <li>incompatible plugins<span class="bullet"> (so you need to load 2+ libraries)</span></li>
-          <li>subpar performance<span class="bullet">: life cycle not in sync with page render,</span><span class="bullet"> changing the non-efficient CSS properties...</span></li>
+          <li>incompatible plugins<span class="bullet"> (often need to more than one library)</span></li>
+          <li>performance isssues<span class="bullet">: life cycle not in sync with page render</span></li>
         </ul>
       </section>
       <section>
@@ -102,11 +104,11 @@ $("#locale").change(function() {
 </code></pre>
       </section>
       <section>
-        <h1 class="bullet">Can we do better?</h1>
-        <h2 class="bullet">What if browsers made it easier to build modular, more encapsulated code?</h2>
+        <h1 class="bullet">How can Web Components help?</h1>
+        <h2 class="bullet">by making it easier to build modular, more encapsulated code</h2>
       </section>
       <section>
-        <h1 class="bullet">What if we could teach new elements to the browser?</h1>
+        <h1 class="bullet">A simple example:</h1>
         <pre class="bullet"><code class="language-markup">&lt;x-calendar&gt;&lt;/x-calendar&gt;
 </code></pre>
       </section>
@@ -128,16 +130,15 @@ calendar.setLocale('fr');
         <ul>
           <li>is a DOM element</li>
           <li>Deals with building its DOM tree</li>
-          <li>Behaves like other DOM elements</li>
-          <li>Lives in the DOM tree with the rest of other elements</li>
-          <li>Can be accessed and manipulated with DOM methods... or UI libraries</li>
+          <li>Behaves like any other DOM element</li>
+          <li>Lives in the DOM tree with other elements</li>
+          <li>Can be accessed and manipulated with DOM methods or jQuery like libraries...</li>
           <li>Is also a JavaScript object</li>
-          <li>... so it can have methods!</li>
+          <li>... so it can have custom methods to interact with the component!</li>
         </ul>
       </section>
       <section>
-        <h2 class="bullet">How do we make this happen?</h2>
-        <h1 class="bullet">The pillars of Web Components</h1>
+        <h2 class="bullet">The pillars of Web Components</h2>
         <ul>
           <li>Custom elements</li>
           <li>HTML templates</li>
@@ -146,32 +147,41 @@ calendar.setLocale('fr');
         </ul>
       </section>
       <section>
-        <h1 class="bullet">1. <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements">Custom elements</a></h1>
-        <h2 class="bullet">Teach the browser about a new type of element</h2>
-        <pre class="bullet"><code class="language-javascript">document.register('web-bell', WebBellPrototype);
-</code></pre>
-      </section>
-      <section>
-        <h1 class="bullet">A custom element prototype</h1>
-        <ul>
-          <li>at least extends <tt>HTMLElement.prototype</tt></li>
-          <li>defines lifecycle callbacks for element instances (created, attached...)</li>
-          <li>defines methods</li>
-          <li>defines getters, setters...</li>
-        </ul>
-      </section>
-      <section>
-        <h2 class="bullet">WebBell Prototype:</h2>
-        <pre class="bullet"><code class="language-javascript">var WebBellPrototype =
-  Object.create(HTMLElement.prototype);
+        <h1 class="bullet">1. Custom elements</h1>
+        <h2 class="bullet">Define new HTML/DOM elements</h2>
+        <h2 class="bullet">Create elements that extend from other elements</h2>
+        <h2 class="bullet">Logically bundle together custom functionality into a single tag</h2>
+        <pre class="bullet"><code class="language-javascript">var XFooProto = Object.create(HTMLElement.prototype);
+  XFooProto.createdCallback = function() {
+    this.innerHTML = &quot;I&apos;m an x-foo-with-markup!&quot;;
+  };
+  document.register(&apos;x-foo&apos;, XFooProto);
   
-WebBellPrototype.createdCallback = function() {
-  this.innerHTML = '🔔';
-};
+  </code></pre>
+      </section>
+      <section>
+        <h1 class="bullet">Registering...</h1>
+        <pre class="bullet"><code class="language-javascript">var proto = Object.create(HTMLElement.prototype);
+  proto.createdCallback = function() {
+    this.addEventListener(&apos;click&apos;, function(e) {
+       console.log(&apos;Foo!&apos;);
+    });
+  };
+  proto.attachedCallback = function() {...};
+  var XFoo = document.registerElement(&apos;x-foo&apos;, {prototype: proto});
+  </code></pre>
+      </section>
+      <section>
+        <h2 class="bullet">Instantiating ...</h2>
+        <h3 class="bullet">Markup...</h3>
+        <pre class="bullet"><code class="language-markup">&lt;x-foo&gt;&lt;/x-foo&gt;</code></pre>
+        <h3 class="bullet">JavaScript...</h3>
+        <pre class="bullet"><code class="language-javascript">var xFoo = new XFoo();
+document.body.appendChild(xFoo);
 </code></pre>
       </section>
       <section>
-        <h1 class="bullet">2. <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template">HTML Templates</a></h1>
+        <h1 class="bullet">2. HTML Templates</h1>
         <h2 class="bullet">"Inert HTML chunks"</h2>
         <h3 class="bullet">not live until you say so</h3>
         <pre class="bullet"><code class="language-markup">&lt;template id="row-template"&gt;

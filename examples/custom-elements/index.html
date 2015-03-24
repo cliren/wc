@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Elements</title>
+
+
+    <link href="../examples.css" type="text/css" rel="stylesheet"/>
+    <link href="../prettify.css" type="text/css" rel="stylesheet"/>
+    <link href="../sunburst.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="../prettify.js"></script>
+
+
+    <!-- Importing Web Component's Polyfill -->
+    <script src="../webcomponents.min.js"></script>
+
+    <!-- Importing Custom Elements -->
+    <link rel="import" href="./x-foo.html">
+</head>
+<body onload="prettyPrint()">
+
+
+<div class="code-snippet">
+    <strong>x-foo.html</strong>
+    <?prettify?>
+    <pre class="prettyprint lang-js">
+        var XFooProto = Object.create(HTMLElement.prototype);
+        XFooProto.createdCallback = function() {
+           this.innerHTML = "<b>I am your custom element Foo!</b>";
+        };
+        var XFoo = document.registerElement('x-foo', {prototype: XFooProto});
+    </pre>
+</div>
+
+
+<div class="code-snippet">
+    <strong>Using x-foo</strong>
+    <?prettify?>
+    <pre class="prettyprint lang-html">
+        &lt;script src="../webcomponents.min.js"&gt;&lt;/script&gt;
+        &lt;link rel="import" href="./x-foo.html"&gt;&lt;/link&gt;
+
+
+        &lt;x-foo&gt;&lt;/x-foo&gt;
+    </pre>
+</div>
+
+Output:
+
+<br/><br/>
+
+<div>
+    <x-foo></x-foo>
+</div>
+
+
+</body>
+</html>

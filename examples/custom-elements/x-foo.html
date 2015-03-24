@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>&lt;hello-world&gt;</title>
+<script>
+    var XFooProto = Object.create(HTMLElement.prototype);
 
-    <!-- Importing Web Component's Polyfill -->
-    <script src="../webcomponents.min.js"></script>
+    XFooProto.createdCallback = function() {
+        this.innerHTML = "<b>I am your custom element Foo!</b>";
+    };
 
-    <!-- Importing Custom Elements -->
-    <link rel="import" href="src/hello-world.html">
-</head>
-<body>
-
-<!-- Using Custom Elements -->
-<hello-world who="Unicorn"></hello-world>
-
-</body>
-</html>
+    var XFoo = document.registerElement('x-foo', {prototype: XFooProto});
+</script>
