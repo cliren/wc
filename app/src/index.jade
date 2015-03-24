@@ -12,18 +12,19 @@ html
         article
 
             section(data-bespoke-state='title')
-                h1 Componentize Web with <br />Web Components
+                h1 Web Components
+                h3 is the future...
                 h2 Surender Katikaneni
 
             section
                 h1.bullet what are web components ?
-                h3.bullet little history before diving in...
+                h3.bullet a little history before diving in...
 
 
             section
                 h1.bullet Web 1.0
                 ul
-                    li Websites
+                    li Simple documents
                     li Homepages
                     li Animated GIFs!
                     li View source
@@ -33,14 +34,9 @@ html
                 h1.bullet Web 1.5
                 ul
                     li Passable CSS
-                        span.bullet : Underlined text!
-                        span.bullet  Link colours!
-                        span.bullet  Border types!
+                        span.bullet : Underlined text!, Link colors!, Border types!
                     li Passable JavaScript
-                        span.bullet : Drop down menus!
-                        span.bullet  Chromeless windows!
-                        span.bullet  Pop ups!
-                        span.bullet  Snow animations!
+                        span.bullet : Drop down menus!, Pop ups!, animations
 
             section
                 h1.bullet Web 2.0
@@ -49,19 +45,14 @@ html
                     li XMLHttpRequest &rarr; AJAX
                     li JSON, JSONP
                     li APIs
-                    li Mash ups
-                    li Rich UIs
+                    li Mash ups, Rich UIs
                     li Widgets!
-                    li Calendars! Color pickers!
+                    li Date pickers! Color pickers!
                     li JS frameworks and libraries
-                        span.bullet : Prototype,
-                        span.bullet  Dojo,
-                        span.bullet  jQuery,
-                        span.bullet  yUI,
-                        span.bullet  mootools...
+                        span.bullet : Prototype, jQuery, Dojo, yUI
 
             section
-                h1.bullet LOTS of plug-ins!
+                h1.bullet TONS of jQuery plug-ins!
                 h2.bullet MASSIVE ecosystem, Awesome!
                 ul
                     li easy to add features to a project
@@ -74,14 +65,15 @@ html
             section
                 h1.bullet Maintenance pain
                 ul
+                    li Side effects
                     li globals / css bleeding all over the page
+                    li bloated code
                     li various coding "standards"
                         span.bullet  (or lack of them)
                     li incompatible plugins
-                        span.bullet  (so you need to load 2+ libraries)
-                    li subpar performance
-                        span.bullet : life cycle not in sync with page render,
-                        span.bullet  changing the non-efficient CSS properties...
+                        span.bullet  (often need to more than one library)
+                    li performance isssues
+                        span.bullet : life cycle not in sync with page render
 
             section
                 h1 Also, cumbersome code
@@ -120,11 +112,11 @@ html
                         });
 
             section
-                h1.bullet Can we do better?
-                h2.bullet What if browsers made it easier to build modular, more encapsulated code?
+                h1.bullet How can Web Components help?
+                h2.bullet by making it easier to build modular, more encapsulated code
 
             section
-                h1.bullet What if we could teach new elements to the browser?
+                h1.bullet A simple example:
                 pre.bullet
                     code.language-markup.
                         &lt;x-calendar&gt;&lt;/x-calendar&gt;
@@ -149,15 +141,14 @@ html
                 ul
                     li is a DOM element
                     li Deals with building its DOM tree
-                    li Behaves like other DOM elements
-                    li Lives in the DOM tree with the rest of other elements
-                    li Can be accessed and manipulated with DOM methods... or UI libraries
+                    li Behaves like any other DOM element
+                    li Lives in the DOM tree with other elements
+                    li Can be accessed and manipulated with DOM methods or jQuery like libraries...
                     li Is also a JavaScript object
-                    li ... so it can have methods!
+                    li ... so it can have custom methods to interact with the component!
 
             section
-                h2.bullet How do we make this happen?
-                h1.bullet The pillars of Web Components
+                h2.bullet The pillars of Web Components
                 ul
                     li Custom elements
                     li HTML templates
@@ -165,33 +156,46 @@ html
                     li HTML imports
 
             section
-                h1.bullet 1. <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements">Custom elements</a>
-                h2.bullet Teach the browser about a new type of element
+                h1.bullet 1. Custom elements
+                h2.bullet Define new HTML/DOM elements
+                h2.bullet Create elements that extend from other elements
+                h2.bullet Logically bundle together custom functionality into a single tag
                 pre.bullet
                     code.language-javascript.
-                        document.register('web-bell', WebBellPrototype);
+                        var XFooProto = Object.create(HTMLElement.prototype);
+                          XFooProto.createdCallback = function() {
+                            this.innerHTML = &quot;I&apos;m an x-foo-with-markup!&quot;;
+                          };
+                          document.register(&apos;x-foo&apos;, XFooProto);
+
 
             section
-                h1.bullet A custom element prototype
-                ul
-                    li at least extends <tt>HTMLElement.prototype</tt>
-                    li defines lifecycle callbacks for element instances (created, attached...)
-                    li defines methods
-                    li defines getters, setters...
-
-            section
-                h2.bullet WebBell Prototype:
+                h1.bullet Registering...
                 pre.bullet
                     code.language-javascript.
-                        var WebBellPrototype =
-                          Object.create(HTMLElement.prototype);
-
-                        WebBellPrototype.createdCallback = function() {
-                          this.innerHTML = '🔔';
-                        };
+                        var proto = Object.create(HTMLElement.prototype);
+                          proto.createdCallback = function() {
+                            this.addEventListener(&apos;click&apos;, function(e) {
+                               console.log(&apos;Foo!&apos;);
+                            });
+                          };
+                          proto.attachedCallback = function() {...};
+                          var XFoo = document.registerElement(&apos;x-foo&apos;, {prototype: proto});
 
             section
-                h1.bullet 2. <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template">HTML Templates</a>
+                h2.bullet Instantiating ...
+                h3.bullet Markup...
+                pre.bullet
+                    code.language-markup.
+                        &lt;x-foo&gt;&lt;/x-foo&gt;
+                h3.bullet JavaScript...
+                pre.bullet
+                    code.language-javascript.
+                        var xFoo = new XFoo();
+                        document.body.appendChild(xFoo);
+
+            section
+                h1.bullet 2. HTML Templates
                 h2.bullet "Inert HTML chunks"
                 h3.bullet not live until you say so
 
