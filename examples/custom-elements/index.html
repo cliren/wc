@@ -22,23 +22,35 @@
 <h1>Custom Elements</h1>
 <hr>
 
+
+<br/><br/>
+<div class="demoarea">
+    <x-foo></x-foo>
+</div>
+
+<br/><br/>
+
 <div class="code-snippet">
     <strong>x-foo.html</strong>
     <?prettify?>
     <pre class="prettyprint lang-js">
         var XFooProto = Object.create(HTMLElement.prototype);
+        var content = 'I am your custom element x-foo.';
 
-        &lt;!-- Optional callback methods --&gt;
         XFooProto.createdCallback = function() {
-            var content = 'I am your custom element x-foo.';
             this.innerHTML = '<b>' + content + '</b>';
             this.addEventListener('click', function(e) {
                 alert(content);
             });
         };
+
         XFooProto.attachedCallback = function() {};
         XFooProto.detachedCallback = function() {};
         XFooProto.detachedCallback = function(attrName, oldVal, newVal) {};
+
+        XFooProto.whoAmI = function() {
+            alert(content);
+        };
 
         var XFoo = document.registerElement('x-foo', {prototype: XFooProto});
     </pre>
@@ -61,15 +73,8 @@
     </pre>
 </div>
 
-<br/><br/>
-
-<div class="demoarea">
-    <x-foo></x-foo>
-</div>
 
 
-<h3>Styling Custom Elements</h3>
-<hr>
 
 </body>
 </html>

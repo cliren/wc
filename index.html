@@ -9,9 +9,9 @@
   <body>
     <article>
       <section data-bespoke-state="title">
-        <h1>Web Components</h1>
-        <h3>is the future...</h3>
+        <h1>Web Components Overview</h1>
         <h2>Surender Katikaneni</h2>
+        <h3>Developer - Climate Blue Team & Precision Planting Field View</h3>
       </section>
       <section>
         <h1 class="bullet">what are web components ?</h1>
@@ -72,16 +72,12 @@
       </section>
       <section>
         <h1>Also, cumbersome code</h1>
-        <pre class="bullet"><code class="language-markup">&lt;div class="dropdown"&gt;
-    &lt;button type="button" data-toggle="dropdown"
-    aria-haspopup="true" aria-expanded="false"&gt;
-        Dropdown trigger
-    &lt;span class="caret"&gt;&lt;/span&gt;
-    &lt;/button&gt;
-    &lt;ul class="dropdown-menu" role="menu"
-    aria-labelledby="dLabel"&gt;
-    ...
-    &lt;/ul&gt;
+        <pre class="bullet"><code class="language-markup">&lt;div class="widget calendar ui theme-winter"&gt;
+  &lt;div class="component-wrapper"&gt;
+    &lt;div class="inner-content"&gt;
+      foo
+    &lt;/div&gt;
+  &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
       </section>
@@ -108,25 +104,25 @@ $("#locale").change(function() {
 </code></pre>
       </section>
       <section>
-        <h1 class="bullet">How can Web Components help?</h1>
+        <h1 class="bullet">Web Components to rescue</h1>
         <h2 class="bullet">by making it easier to build modular, more encapsulated code</h2>
       </section>
       <section>
-        <h1 class="bullet">A simple example:</h1>
-        <pre class="bullet"><code class="language-markup">&lt;x-calendar&gt;&lt;/x-calendar&gt;
-</code></pre>
+        <h1 class="bullet">what are Web Components?</h1>
+        <h2 class="bullet">are a collection of standards which enable truly encapsulated and reusable components for the web</h2>
+        <h2 class="bullet">and is comprised of four parts:</h2>
+        <ul>
+          <li>Custom elements</li>
+          <li>HTML templates</li>
+          <li>Shadow DOM</li>
+          <li>HTML imports</li>
+        </ul>
       </section>
       <section>
+        <h2 class="bullet">A simple example:</h2>
+        <pre class="bullet"><code class="language-markup">&lt;x-calendar&gt;&lt;/x-calendar&gt;</code></pre>
         <pre class="bullet"><code class="language-javascript">// create a new element
-var calendar =
-  document.createElement('x-calendar');
-  
-// find existing element
-var calendar =
-  document.querySelector('x-calendar');
-  </code></pre>
-      </section>
-      <section>
+var calendar = document.createElement('x-calendar');</code></pre>
         <pre class="bullet"><code class="language-javascript">//access custom methods
 calendar.nextMonth();
 calendar.setLocale('fr');
@@ -145,30 +141,13 @@ calendar.setLocale('fr');
         </ul>
       </section>
       <section>
-        <h1 class="bullet">Web Components...</h1>
-        <h2 class="bullet">are a collection of standards which enable truly encapsulated and reusable components for the web</h2>
-        <h2 class="bullet">and is comprised of four parts:</h2>
-        <ul>
-          <li>Custom elements</li>
-          <li>HTML templates</li>
-          <li>Shadow DOM</li>
-          <li>HTML imports</li>
-        </ul>
-      </section>
-      <section>
         <h1 class="bullet">1. Custom elements</h1>
         <h2 class="bullet">Define new HTML/DOM elements</h2>
         <h2 class="bullet">Create elements that extend from other elements</h2>
-        <h2 class="bullet">Logically bundle together custom functionality into a single tag</h2>
-        <pre class="bullet"><code class="language-javascript">var XFooProto = Object.create(HTMLElement.prototype);
-  XFooProto.createdCallback = function() {
-    this.innerHTML = "I&apos;m an x-foo-with-markup!";
-  };
-  document.register(&apos;x-foo&apos;, XFooProto);
-  </code></pre>
+        <h2 class="bullet">Logically bundle custom features into a single tag</h2>
       </section>
       <section>
-        <h1 class="bullet">Registering...</h1>
+        <h1 class="bullet">Defining a Custom Element</h1>
         <pre class="bullet"><code class="language-javascript">var proto = Object.create(HTMLElement.prototype);
   proto.createdCallback = function() {
     this.addEventListener(&apos;click&apos;, function(e) {
@@ -180,7 +159,7 @@ calendar.setLocale('fr');
   </code></pre>
       </section>
       <section>
-        <h2 class="bullet">Instantiating ...</h2>
+        <h2 class="bullet">Instantiating a Custom Element</h2>
         <h3 class="bullet">Markup...</h3>
         <pre class="bullet"><code class="language-markup">&lt;x-foo&gt;&lt;/x-foo&gt;</code></pre>
         <h3 class="bullet">JavaScript...</h3>
@@ -189,7 +168,7 @@ document.body.appendChild(xFoo);
 </code></pre>
       </section>
       <section data-bespoke-state="feature">
-        <h1>Lify cycle methods</h1><img src="images/life-cycle-methods.png">
+        <h1>Life cycle methods</h1><img src="images/life-cycle-methods.png">
       </section>
       <section>
         <h1 class="bullet">2. HTML Templates</h1>
@@ -226,32 +205,29 @@ shadow.appendChild(otherNodes);
       <section>
         <h1 class="bullet">4. HTML imports</h1>
         <h2 class="bullet">Include HTML documents in other HTML documents</h2>
-        <h2 class="bullet">or: "require() for the web"</h2>
+        <h3 class="bullet">or: "require() for the web"</h3>
+        <h2 class="bullet">Why another style of import?</h2>
+        <ul>
+          <li>JS: script src</li>
+          <li>CSS: link rel="stylesheet"</li>
+          <li>image: img, audio has <audio>, video has <video></li>
+          <li>what about HTML which is the cream of web?</li>
+        </ul>
         <pre class="bullet"><code class="language-markup">// Importing Custom Elements
-link(rel='import', href='./x-foo.html')
-</code></pre>
+link(rel='import', href='./x-foo.html')</code></pre>
+        <h2 class="bullet">Multiple imports to the same resource are automatically de-duped by the browser and are retrieved only once.</h2>
       </section>
       <section data-bespoke-state="feature">
         <h1>Browser Compatablity - Native support</h1><img src="images/browser-support.png">
       </section>
       <section>
         <h2 class="bullet">Not supported on every browser</h2>
-        <h1 class="bullet">but... <span class="bullet">polyfills!</a></h1>
+        <h3 class="bullet">but... <span class="bullet">polyfills!</a></h3>
+        <h2 class="bullet"><a href="https://github.com/WebComponents/webcomponentsjs"><tt>webcomponents.js</tt></a></h2>
+        <h3 class="bullet">Custom Elements are pretty safe to use right now!</h3>
       </section>
       <section data-bespoke-state="feature">
         <h1>Browser Compatablity - with pollyfills</h1><img src="images/polyfills-browser-support.png">
-      </section>
-      <section>
-        <h1 class="bullet"><a href="https://github.com/WebComponents/webcomponentsjs"><tt>webcomponents.js</tt></a></h1>
-        <ul>
-          <li>polyfills custom elements, HTML imports, Shadow DOM</li>
-          <li>also WeakMap and Mutation Observers</li>
-        </ul>
-        <h2 class="bullet">Also <tt>webcomponents-lite.js</tt></h2>
-        <ul>
-          <li>polyfill custom elements and HTML imports only</li>
-        </ul>
-        <p class="bullet">Custom Elements are pretty safe to use right now!</p>
       </section>
       <section>
         <h2 class="bullet">A note of warning</h2>
@@ -262,7 +238,7 @@ link(rel='import', href='./x-foo.html')
         </ul>
       </section>
       <section>
-        <h1 class="bullet">What are Polymer X-Tag, skateJS?</h1>
+        <h1 class="bullet">What are Polymer, X-Tag, skateJS?</h1>
         <h2 class="bullet">Syntactic sugar for vanilla web components</h2>
         <ul>
           <li>Built on top of the Web Components pillars</li>
@@ -302,10 +278,6 @@ link(rel='import', href='./x-foo.html')
     this.innerHTML = 'BELL';
   }
 });
-
-
-
-
 </code></pre>
       </section>
       <section>
@@ -315,6 +287,7 @@ link(rel='import', href='./x-foo.html')
       </section>
       <section data-bespoke-state="title">
         <h1>Thanks!</h1>
+        <h2><a href="./examples">Demo</a></h2>
       </section>
     </article>
     <script src="js/app.js"></script>

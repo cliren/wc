@@ -12,9 +12,9 @@ html
         article
 
             section(data-bespoke-state='title')
-                h1 Web Components
-                h3 is the future...
+                h1 Web Components Overview
                 h2 Surender Katikaneni
+                h3 Developer - Climate Blue Team & Precision Planting Field View
 
             section
                 h1.bullet what are web components ?
@@ -78,16 +78,12 @@ html
                 h1 Also, cumbersome code
                 pre.bullet
                     code.language-markup.
-                        &lt;div class="dropdown"&gt;
-                            &lt;button type="button" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false"&gt;
-                                Dropdown trigger
-                            &lt;span class="caret"&gt;&lt;/span&gt;
-                            &lt;/button&gt;
-                            &lt;ul class="dropdown-menu" role="menu"
-                            aria-labelledby="dLabel"&gt;
-                            ...
-                            &lt;/ul&gt;
+                        &lt;div class="widget calendar ui theme-winter"&gt;
+                          &lt;div class="component-wrapper"&gt;
+                            &lt;div class="inner-content"&gt;
+                              foo
+                            &lt;/div&gt;
+                          &lt;/div&gt;
                         &lt;/div&gt;
 
             section
@@ -115,27 +111,28 @@ html
                         });
 
             section
-                h1.bullet How can Web Components help?
+                h1.bullet Web Components to rescue
                 h2.bullet by making it easier to build modular, more encapsulated code
 
             section
-                h1.bullet A simple example:
+                h1.bullet what are Web Components?
+                h2.bullet are a collection of standards which enable truly encapsulated and reusable components for the web
+                h2.bullet and is comprised of four parts:
+                ul
+                    li Custom elements
+                    li HTML templates
+                    li Shadow DOM
+                    li HTML imports
+
+            section
+                h2.bullet A simple example:
                 pre.bullet
                     code.language-markup.
                         &lt;x-calendar&gt;&lt;/x-calendar&gt;
-
-            section
                 pre.bullet
                     code.language-javascript.
                         // create a new element
-                        var calendar =
-                          document.createElement('x-calendar');
-
-                        // find existing element
-                        var calendar =
-                          document.querySelector('x-calendar');
-
-            section
+                        var calendar = document.createElement('x-calendar');
                 pre.bullet
                     code.language-javascript.
                         //access custom methods
@@ -153,31 +150,16 @@ html
                     li Is also a JavaScript object
                     li ... so it can have custom methods to interact with the component!
 
-            section
-                h1.bullet Web Components...
-                h2.bullet are a collection of standards which enable truly encapsulated and reusable components for the web
-                h2.bullet and is comprised of four parts:
-                ul
-                    li Custom elements
-                    li HTML templates
-                    li Shadow DOM
-                    li HTML imports
+
 
             section
                 h1.bullet 1. Custom elements
                 h2.bullet Define new HTML/DOM elements
                 h2.bullet Create elements that extend from other elements
-                h2.bullet Logically bundle together custom functionality into a single tag
-                pre.bullet
-                    code.language-javascript.
-                        var XFooProto = Object.create(HTMLElement.prototype);
-                          XFooProto.createdCallback = function() {
-                            this.innerHTML = "I&apos;m an x-foo-with-markup!";
-                          };
-                          document.register(&apos;x-foo&apos;, XFooProto);
+                h2.bullet Logically bundle custom features into a single tag
 
             section
-                h1.bullet Registering...
+                h1.bullet Defining a Custom Element
                 pre.bullet
                     code.language-javascript.
                         var proto = Object.create(HTMLElement.prototype);
@@ -190,7 +172,7 @@ html
                           var XFoo = document.registerElement(&apos;x-foo&apos;, {prototype: proto});
 
             section
-                h2.bullet Instantiating ...
+                h2.bullet Instantiating a Custom Element
                 h3.bullet Markup...
                 pre.bullet
                     code.language-markup.
@@ -202,7 +184,7 @@ html
                         document.body.appendChild(xFoo);
 
             section(data-bespoke-state='feature')
-                h1 Lify cycle methods
+                h1 Life cycle methods
                 img(src='images/life-cycle-methods.png')
 
             section
@@ -243,11 +225,19 @@ html
             section
                 h1.bullet 4. HTML imports
                 h2.bullet Include HTML documents in other HTML documents
-                h2.bullet or: "require() for the web"
+                h3.bullet or: "require() for the web"
+                h2.bullet Why another style of import?
+                ul
+                    li JS: script src
+                    li CSS: link rel="stylesheet"
+                    li image: img, audio has <audio>, video has <video>
+                    li what about HTML which is the cream of web?
                 pre.bullet
                     code.language-markup.
                         // Importing Custom Elements
                         link(rel='import', href='./x-foo.html')
+                h2.bullet Multiple imports to the same resource are automatically de-duped by the browser and are retrieved only once.
+
 
             section(data-bespoke-state='feature')
                 h1 Browser Compatablity - Native support
@@ -255,21 +245,14 @@ html
 
             section
                 h2.bullet Not supported on every browser
-                h1.bullet but... <span class="bullet">polyfills!</a>
+                h3.bullet but... <span class="bullet">polyfills!</a>
+                h2.bullet <a href="https://github.com/WebComponents/webcomponentsjs"><tt>webcomponents.js</tt></a>
+                h3.bullet Custom Elements are pretty safe to use right now!
+
 
             section(data-bespoke-state='feature')
                 h1 Browser Compatablity - with pollyfills
                 img(src='images/polyfills-browser-support.png')
-
-            section
-                h1.bullet <a href="https://github.com/WebComponents/webcomponentsjs"><tt>webcomponents.js</tt></a>
-                ul
-                    li polyfills custom elements, HTML imports, Shadow DOM
-                    li also WeakMap and Mutation Observers
-                h2.bullet Also <tt>webcomponents-lite.js</tt>
-                ul
-                    li polyfill custom elements and HTML imports only
-                p.bullet Custom Elements are pretty safe to use right now!
 
             section
                 h2.bullet A note of warning
@@ -279,7 +262,7 @@ html
                     li Especially Shadow DOM polyfill!
 
             section
-                h1.bullet What are Polymer X-Tag, skateJS?
+                h1.bullet What are Polymer, X-Tag, skateJS?
                 h2.bullet Syntactic sugar for vanilla web components
                 ul
                     li Built on top of the Web Components pillars
@@ -323,10 +306,6 @@ html
                           }
                         });
 
-
-
-
-
             section
                 h3 for more info
                 h1 <a href="http://webcomponents.org/">webcomponents.org</a>
@@ -335,6 +314,7 @@ html
 
             section(data-bespoke-state='title')
                 h1 Thanks!
+                h2 <a href="./examples">Demo</a>
 
 
         script(src='js/app.js')

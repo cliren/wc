@@ -1,17 +1,24 @@
 <script>
     var XFooProto = Object.create(HTMLElement.prototype);
+    var content = 'I am your custom element x-foo.';
 
     XFooProto.createdCallback = function() {
-        var content = 'I am your custom element x-foo.';
         this.innerHTML = '<b>' + content + '</b>';
         this.addEventListener('click', function(e) {
             alert(content);
         });
     };
 
-    XFooProto.attachedCallback = function() {};
-    XFooProto.detachedCallback = function() {};
-    XFooProto.detachedCallback = function(attrName, oldVal, newVal) {};
+    XFooProto.attachedCallback = function() {
+    };
+    XFooProto.detachedCallback = function() {
+    };
+    XFooProto.detachedCallback = function(attrName, oldVal, newVal) {
+    };
+
+    XFooProto.whoAmI = function() {
+        alert(content);
+    };
 
     var XFoo = document.registerElement('x-foo', {prototype: XFooProto});
 </script>

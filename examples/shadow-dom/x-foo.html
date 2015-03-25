@@ -1,0 +1,26 @@
+<template>
+    <style>
+        :host p {
+            color: blue;
+        }
+    </style>
+
+    <p id="sdContent">I'm an element from Shadow DOM.</p>
+    <!--Insertion Point-->
+    <content></content>
+</template>
+
+
+<script>
+    var XFooProto = Object.create(HTMLElement.prototype);
+    var thisDoc = document.currentScript.ownerDocument;
+
+    XFooProto.createdCallback = function() {
+        var t = thisDoc.querySelector('template');
+        var clone = document.importNode(t.content, true);
+        this.createShadowRoot().appendChild(clone);
+    };
+
+    var XFoo = document.registerElement('x-foo', {prototype: XFooProto});
+</script>
+
