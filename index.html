@@ -48,7 +48,7 @@
         </ul>
       </section>
       <section>
-        <h1 class="bullet">TONS of jQuery plug-ins!</h1>
+        <h1 class="bullet">Tons of jQuery plug-ins!</h1>
         <h2 class="bullet">MASSIVE ecosystem, Awesome!</h2>
         <ul>
           <li>easy to add features to a project</li>
@@ -72,12 +72,16 @@
       </section>
       <section>
         <h1>Also, cumbersome code</h1>
-        <pre class="bullet"><code class="language-markup">&lt;div class="widget calendar ui theme-winter"&gt;
-  &lt;div class="component-wrapper"&gt;
-    &lt;div class="inner-content"&gt;
-      (ad nauseaum)
-    &lt;/div&gt;
-  &lt;/div&gt;
+        <pre class="bullet"><code class="language-markup">&lt;div class="dropdown"&gt;
+    &lt;button type="button" data-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false"&gt;
+        Dropdown trigger
+    &lt;span class="caret"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;ul class="dropdown-menu" role="menu"
+    aria-labelledby="dLabel"&gt;
+    ...
+    &lt;/ul&gt;
 &lt;/div&gt;
 </code></pre>
       </section>
@@ -113,15 +117,18 @@ $("#locale").change(function() {
 </code></pre>
       </section>
       <section>
-        <pre class="bullet"><code class="language-javascript">var calendar =
+        <pre class="bullet"><code class="language-javascript">// create a new element
+var calendar =
   document.createElement('x-calendar');
   
+// find existing element
 var calendar =
   document.querySelector('x-calendar');
   </code></pre>
       </section>
       <section>
-        <pre class="bullet"><code class="language-javascript">calendar.nextMonth();
+        <pre class="bullet"><code class="language-javascript">//access custom methods
+calendar.nextMonth();
 calendar.setLocale('fr');
 </code></pre>
       </section>
@@ -138,7 +145,9 @@ calendar.setLocale('fr');
         </ul>
       </section>
       <section>
-        <h2 class="bullet">The pillars of Web Components</h2>
+        <h1 class="bullet">Web Components...</h1>
+        <h2 class="bullet">are a collection of standards which enable truly encapsulated and reusable components for the web</h2>
+        <h2 class="bullet">and is comprised of four parts:</h2>
         <ul>
           <li>Custom elements</li>
           <li>HTML templates</li>
@@ -153,10 +162,9 @@ calendar.setLocale('fr');
         <h2 class="bullet">Logically bundle together custom functionality into a single tag</h2>
         <pre class="bullet"><code class="language-javascript">var XFooProto = Object.create(HTMLElement.prototype);
   XFooProto.createdCallback = function() {
-    this.innerHTML = &quot;I&apos;m an x-foo-with-markup!&quot;;
+    this.innerHTML = "I&apos;m an x-foo-with-markup!";
   };
   document.register(&apos;x-foo&apos;, XFooProto);
-  
   </code></pre>
       </section>
       <section>
@@ -180,6 +188,9 @@ calendar.setLocale('fr');
 document.body.appendChild(xFoo);
 </code></pre>
       </section>
+      <section data-bespoke-state="feature">
+        <h1>Lify cycle methods</h1><img src="images/life-cycle-methods.png">
+      </section>
       <section>
         <h1 class="bullet">2. HTML Templates</h1>
         <h2 class="bullet">"Inert HTML chunks"</h2>
@@ -193,17 +204,7 @@ document.body.appendChild(xFoo);
 </code></pre>
       </section>
       <section>
-        <h2 class="bullet">Creating rows on the fly</h2>
-        <pre class="bullet"><code class="language-javascript">var tpl =
-  document.getElementById('row-template');
-var table =
-  document.getElementById('form-table');
-  
-table.appendChild(tpl.content.cloneNode());
-</code></pre>
-      </section>
-      <section>
-        <h1 class="bullet">3. <a href="http://w3c.github.io/webcomponents/spec/shadow/">Shadow DOM</a></h1>
+        <h1 class="bullet">3. Shadow DOM</h1>
         <h2 class="bullet">Or: you can see, but not touch this!</h2>
         <pre class="bullet"><code class="language-javascript">var shadow = node.createShadowRoot();
 shadow.appendChild(otherNodes);
@@ -219,36 +220,26 @@ shadow.appendChild(otherNodes);
           <li>Creates a boundary around your element</li>
           <li>Superuseful for things such as players, calendars</li>
           <li>It is still in the same doc context (not an iframe)</li>
-          <li>Many concepts and subtleties</li>
           <li><a href="http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/">Nice tutorial</a></li>
         </ul>
       </section>
       <section>
-        <h1 class="bullet">4. <a href="http://w3c.github.io/webcomponents/spec/imports/">HTML imports</a></h1>
+        <h1 class="bullet">4. HTML imports</h1>
         <h2 class="bullet">Include HTML documents in other HTML documents</h2>
         <h2 class="bullet">or: "require() for the web"</h2>
-        <pre class="bullet"><code class="language-markup">&lt;link rel="import" href="my-component.html"&gt;
+        <pre class="bullet"><code class="language-markup">// Importing Custom Elements
+link(rel='import', href='./x-foo.html')
 </code></pre>
       </section>
-      <section>
-        <h2 class="bullet">my-component.html's <tt>&lt;head&gt;</tt></h2>
-        <pre class="bullet"><code class="language-markup">&lt;script src="my-component.js"&gt;&lt;/script&gt;
-&lt;link rel="stylesheet" href="my-component.css"&gt;</code></pre>
-        <p class="bullet"><a href="http://www.html5rocks.com/en/tutorials/webcomponents/imports/">A tutorial</a></p>
-      </section>
-      <section>
-        <h1 class="bullet">(Rough) support overview</h1>
-        <ul>
-          <li>Chrome, Opera: ALL</li>
-          <li>Firefox: Behind a flag, ALL except HTML imports</li>
-          <li>Safari: Templates</li>
-          <li>Internet Explorer<span class="bullet">: ¯\_(ツ)_/¯</span></li>
-        </ul>
-        <p class="bullet"><a href="https://jonrimmer.github.io/are-we-componentized-yet/">Are we componentized yet?</a></p>
+      <section data-bespoke-state="feature">
+        <h1>Browser Compatablity - Native support</h1><img src="images/browser-support.png">
       </section>
       <section>
         <h2 class="bullet">Not supported on every browser</h2>
         <h1 class="bullet">but... <span class="bullet">polyfills!</a></h1>
+      </section>
+      <section data-bespoke-state="feature">
+        <h1>Browser Compatablity - with pollyfills</h1><img src="images/polyfills-browser-support.png">
       </section>
       <section>
         <h1 class="bullet"><a href="https://github.com/WebComponents/webcomponentsjs"><tt>webcomponents.js</tt></a></h1>
@@ -268,13 +259,11 @@ shadow.appendChild(otherNodes);
         <ul>
           <li>They come at a cost (bandwidth, processing)</li>
           <li>Especially Shadow DOM polyfill!</li>
-          <li>Be mindful and aware</li>
         </ul>
       </section>
       <section>
-        <h1 class="bullet">What about <a href="https://www.polymer-project.org/">Polymer</a>? <a href="http://x-tags.org/">X-Tag</a>?</h1>
-        <h2 class="bullet">Syntactic sugar to make vanilla web components less sour</h2>
-        <h3 class="bullet">I ❤️ BAD PUNS</h3>
+        <h1 class="bullet">What are Polymer X-Tag, skateJS?</h1>
+        <h2 class="bullet">Syntactic sugar for vanilla web components</h2>
         <ul>
           <li>Built on top of the Web Components pillars</li>
           <li>... or on the polyfills</li>
@@ -313,24 +302,11 @@ shadow.appendChild(otherNodes);
     this.innerHTML = 'BELL';
   }
 });
+
+
+
+
 </code></pre>
-      </section>
-      <section>
-        <h1>There's also <a href="http://bosonic.github.io">Bosonic</a></h1>
-        <h3>(but I haven't had time to look into it in detail yet)</h3>
-        <ul>
-          <li>using a mixture of webcomponents.js polyfills and their own</li>
-          <li>compatible down to IE9</li>
-        </ul>
-      </section>
-      <section>
-        <h1 class="bullet">Which one is better?</h1>
-        <ul>
-          <li>All are nice libraries...</li>
-          <li>but you need the library the component was built with to instantiate them</li>
-          <li>and we're back to the jQuery/Moo situation</li>
-          <li>Yet once you instantiate them, they are just DOM elements! Yay!</li>
-        </ul>
       </section>
       <section>
         <h3>for more info</h3>
@@ -339,8 +315,6 @@ shadow.appendChild(otherNodes);
       </section>
       <section data-bespoke-state="title">
         <h1>Thanks!</h1>
-        <h2><a href="https://twitter.com/supersole">@supersole</a></h2>
-        <h3><a href="http://soledadpenades.com">soledadpenades.com</a></h3>
       </section>
     </article>
     <script src="js/app.js"></script>

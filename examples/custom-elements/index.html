@@ -19,6 +19,8 @@
 </head>
 <body onload="prettyPrint()">
 
+<h1>Custom Elements</h1>
+<hr>
 
 <div class="code-snippet">
     <strong>x-foo.html</strong>
@@ -26,13 +28,17 @@
     <pre class="prettyprint lang-js">
         var XFooProto = Object.create(HTMLElement.prototype);
 
+        &lt;!-- Optional callback methods --&gt;
         XFooProto.createdCallback = function() {
-            var content = 'I am your custom element Foo!';
+            var content = 'I am your custom element x-foo.';
             this.innerHTML = '<b>' + content + '</b>';
             this.addEventListener('click', function(e) {
                 alert(content);
             });
         };
+        XFooProto.attachedCallback = function() {};
+        XFooProto.detachedCallback = function() {};
+        XFooProto.detachedCallback = function(attrName, oldVal, newVal) {};
 
         var XFoo = document.registerElement('x-foo', {prototype: XFooProto});
     </pre>
@@ -55,14 +61,15 @@
     </pre>
 </div>
 
-Output:
-
 <br/><br/>
 
-<div>
+<div class="demoarea">
     <x-foo></x-foo>
 </div>
 
+
+<h3>Styling Custom Elements</h3>
+<hr>
 
 </body>
 </html>

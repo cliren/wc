@@ -1,8 +1,28 @@
 body {
-    padding-top: 5em;
     margin-left: 10em;
 }
 
 .code-snippet {
     width: 40em;
+}
+
+.demoarea {
+    margin-top: 20px;
+}
+
+.demoarea {
+    padding: 10px;
+    background: #fff;
+    border: 1px dashed #000;
+    display: inline-block;
+    position: relative;
+}
+
+.demoarea:before {
+    content: 'Live demo:';
+    position: absolute;
+    top: -30px;
+    left: 0;
+    font-weight: bold;
+    text-transform: uppercase;
 }

@@ -20,7 +20,6 @@ html
                 h1.bullet what are web components ?
                 h3.bullet a little history before diving in...
 
-
             section
                 h1.bullet Web 1.0
                 ul
@@ -52,7 +51,7 @@ html
                         span.bullet : Prototype, jQuery, Dojo, yUI
 
             section
-                h1.bullet TONS of jQuery plug-ins!
+                h1.bullet Tons of jQuery plug-ins!
                 h2.bullet MASSIVE ecosystem, Awesome!
                 ul
                     li easy to add features to a project
@@ -79,12 +78,16 @@ html
                 h1 Also, cumbersome code
                 pre.bullet
                     code.language-markup.
-                        &lt;div class="widget calendar ui theme-winter"&gt;
-                          &lt;div class="component-wrapper"&gt;
-                            &lt;div class="inner-content"&gt;
-                              (ad nauseaum)
-                            &lt;/div&gt;
-                          &lt;/div&gt;
+                        &lt;div class="dropdown"&gt;
+                            &lt;button type="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"&gt;
+                                Dropdown trigger
+                            &lt;span class="caret"&gt;&lt;/span&gt;
+                            &lt;/button&gt;
+                            &lt;ul class="dropdown-menu" role="menu"
+                            aria-labelledby="dLabel"&gt;
+                            ...
+                            &lt;/ul&gt;
                         &lt;/div&gt;
 
             section
@@ -124,15 +127,18 @@ html
             section
                 pre.bullet
                     code.language-javascript.
+                        // create a new element
                         var calendar =
                           document.createElement('x-calendar');
 
+                        // find existing element
                         var calendar =
                           document.querySelector('x-calendar');
 
             section
                 pre.bullet
                     code.language-javascript.
+                        //access custom methods
                         calendar.nextMonth();
                         calendar.setLocale('fr');
 
@@ -148,7 +154,9 @@ html
                     li ... so it can have custom methods to interact with the component!
 
             section
-                h2.bullet The pillars of Web Components
+                h1.bullet Web Components...
+                h2.bullet are a collection of standards which enable truly encapsulated and reusable components for the web
+                h2.bullet and is comprised of four parts:
                 ul
                     li Custom elements
                     li HTML templates
@@ -164,10 +172,9 @@ html
                     code.language-javascript.
                         var XFooProto = Object.create(HTMLElement.prototype);
                           XFooProto.createdCallback = function() {
-                            this.innerHTML = &quot;I&apos;m an x-foo-with-markup!&quot;;
+                            this.innerHTML = "I&apos;m an x-foo-with-markup!";
                           };
                           document.register(&apos;x-foo&apos;, XFooProto);
-
 
             section
                 h1.bullet Registering...
@@ -194,6 +201,10 @@ html
                         var xFoo = new XFoo();
                         document.body.appendChild(xFoo);
 
+            section(data-bespoke-state='feature')
+                h1 Lify cycle methods
+                img(src='images/life-cycle-methods.png')
+
             section
                 h1.bullet 2. HTML Templates
                 h2.bullet "Inert HTML chunks"
@@ -209,18 +220,7 @@ html
                         &lt;/template&gt;
 
             section
-                h2.bullet Creating rows on the fly
-                pre.bullet
-                    code.language-javascript.
-                        var tpl =
-                          document.getElementById('row-template');
-                        var table =
-                          document.getElementById('form-table');
-
-                        table.appendChild(tpl.content.cloneNode());
-
-            section
-                h1.bullet 3. <a href="http://w3c.github.io/webcomponents/spec/shadow/">Shadow DOM</a>
+                h1.bullet 3. Shadow DOM
                 h2.bullet Or: you can see, but not touch this!
                 pre.bullet
                     code.language-javascript.
@@ -238,37 +238,28 @@ html
                     li Creates a boundary around your element
                     li Superuseful for things such as players, calendars
                     li It is still in the same doc context (not an iframe)
-                    li Many concepts and subtleties
                     li <a href="http://www.html5rocks.com/en/tutorials/webcomponents/shadowdom/">Nice tutorial</a>
 
             section
-                h1.bullet 4. <a href="http://w3c.github.io/webcomponents/spec/imports/">HTML imports</a>
+                h1.bullet 4. HTML imports
                 h2.bullet Include HTML documents in other HTML documents
                 h2.bullet or: "require() for the web"
                 pre.bullet
                     code.language-markup.
-                        &lt;link rel="import" href="my-component.html"&gt;
+                        // Importing Custom Elements
+                        link(rel='import', href='./x-foo.html')
 
-            section
-                h2.bullet my-component.html's <tt>&lt;head&gt;</tt>
-                pre.bullet
-                    code.language-markup.
-                        &lt;script src="my-component.js"&gt;&lt;/script&gt;
-                        &lt;link rel="stylesheet" href="my-component.css"&gt;
-                p.bullet <a href="http://www.html5rocks.com/en/tutorials/webcomponents/imports/">A tutorial</a>
-
-            section
-                h1.bullet (Rough) support overview
-                ul
-                    li Chrome, Opera: ALL
-                    li Firefox: Behind a flag, ALL except HTML imports
-                    li Safari: Templates
-                    li Internet Explorer<span class="bullet">: ¯\_(ツ)_/¯</span>
-                p.bullet <a href="https://jonrimmer.github.io/are-we-componentized-yet/">Are we componentized yet?</a>
+            section(data-bespoke-state='feature')
+                h1 Browser Compatablity - Native support
+                img(src='images/browser-support.png')
 
             section
                 h2.bullet Not supported on every browser
                 h1.bullet but... <span class="bullet">polyfills!</a>
+
+            section(data-bespoke-state='feature')
+                h1 Browser Compatablity - with pollyfills
+                img(src='images/polyfills-browser-support.png')
 
             section
                 h1.bullet <a href="https://github.com/WebComponents/webcomponentsjs"><tt>webcomponents.js</tt></a>
@@ -286,12 +277,10 @@ html
                 ul
                     li They come at a cost (bandwidth, processing)
                     li Especially Shadow DOM polyfill!
-                    li Be mindful and aware
 
             section
-                h1.bullet What about <a href="https://www.polymer-project.org/">Polymer</a>? <a href="http://x-tags.org/">X-Tag</a>?
-                h2.bullet Syntactic sugar to make vanilla web components less sour
-                h3.bullet I ❤️ BAD PUNS
+                h1.bullet What are Polymer X-Tag, skateJS?
+                h2.bullet Syntactic sugar for vanilla web components
                 ul
                     li Built on top of the Web Components pillars
                     li ... or on the polyfills
@@ -334,20 +323,9 @@ html
                           }
                         });
 
-            section
-                h1 There's also <a href="http://bosonic.github.io">Bosonic</a>
-                h3 (but I haven't had time to look into it in detail yet)
-                ul
-                    li using a mixture of webcomponents.js polyfills and their own
-                    li compatible down to IE9
 
-            section
-                h1.bullet Which one is better?
-                ul
-                    li All are nice libraries...
-                    li but you need the library the component was built with to instantiate them
-                    li and we're back to the jQuery/Moo situation
-                    li Yet once you instantiate them, they are just DOM elements! Yay!
+
+
 
             section
                 h3 for more info
@@ -357,8 +335,6 @@ html
 
             section(data-bespoke-state='title')
                 h1 Thanks!
-                h2 <a href="https://twitter.com/supersole">@supersole</a>
-                h3 <a href="http://soledadpenades.com">soledadpenades.com</a>
 
 
         script(src='js/app.js')
